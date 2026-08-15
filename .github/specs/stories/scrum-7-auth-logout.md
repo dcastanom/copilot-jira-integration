@@ -9,10 +9,16 @@
 
 Implementar implementar endpoint de logout (post /auth/logout)
 
+## Clarifications
+
+### Session 2026-08-15
+
+- Q: Which revocation mechanism should the logout flow enforce for this story? → A: Database blacklist table
+
 ## Acceptance Criteria
 
 - [ ] Recibe JWT token
-- [ ] Invalida token en blacklist (Redis o BD)
+- [ ] Invalida token en blacklist en tabla de tokens revocados en BD
 - [ ] Retorna 200 si logout exitoso
 - [ ] Token no puede ser usado después de logout
 - [ ] Refresh token también es revocado
@@ -38,6 +44,7 @@ Scenario: Token inválido
 - Pattern: Repository + Service + Controller
 - Auth: JWT validation required
 - Validation: Zod or class-validator
+- Revocation: blacklist persisted in PostgreSQL table for invalidated access/refresh tokens
 
 ## Implementation Checklist
 
