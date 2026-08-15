@@ -69,6 +69,7 @@ Spec First → Plan → Code → Test → Deploy
 - Write spec BEFORE code (`.github/specs/stories/SCRUM-X.md`)
 - Spec defines acceptance criteria
 - Code implements spec (not spec follows code)
+- Always create a new branch for each spec/feature to implement.
 - Tests validate spec compliance
 - Never code without a spec
 

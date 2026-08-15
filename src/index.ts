@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import { AuthController } from './controllers/auth.controller.js';
 import { AuthService } from './services/auth.service.js';
 import { UserRepository } from './repositories/user.repository.js';
+import { TokenRevocationRepository } from './repositories/token-revocation.repository.js';
 import type { User } from './models/user.model.js';
 
 export const app: Express = express();
@@ -18,10 +19,11 @@ const seedUsers: User[] = [
   },
 ];
 
-const authService = new AuthService(new UserRepository(seedUsers));
+const authService = new AuthService(new UserRepository(seedUsers), new TokenRevocationRepository());
 const authController = new AuthController(authService);
 
 app.post('/auth/login', (req, res) => authController.login(req, res));
+app.post('/auth/logout', (req, res) => authController.logout(req, res));
 
 export default app;
 
